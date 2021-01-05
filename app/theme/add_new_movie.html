@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h3>{{page_title}}</h3>
+    <h4>User: {{user}} <a href="/login.php?logout"  onclick="return confirm('Are You Sure?')">Logout</a></h4>
+</div>
+    {{show_info}}
+<script src="/static/main.js" type="application/javascript"></script>
+</body>
+</html>

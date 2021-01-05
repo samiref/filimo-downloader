@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+    <div class="container center">
+        <h3>{{page_title}}</h3>
+        <form action="{{login_form_action}}" method="post" enctype="application/x-www-form-urlencoded">
+<!--            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+            </div>-->
+            {{alert}}
+
+            <label for="username">Username (Phone or Email)</label>
+            <input type="text" id="username" name="username"  value="{{username}}" {{disable_username}} placeholder="09... or email">
+
+            <label for="code">{{code}}</label>
+            <input type="text" id="code" name="code" placeholder="">
+
+
+            <input type="hidden" name="guid" value="{{guid}}">
+            <input type="hidden" name="temp_id" value="{{temp_id}}">
+
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+</body>
+</html>

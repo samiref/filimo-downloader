@@ -1,0 +1,16 @@
+<tr>
+    <td style="width: 20px"><input type="checkbox" checked name="movie[{{id}}]" value="yes"></td>
+    <td style="width: 50px"><img src="{{poster}}" width="80px" style="margin: 15px;" /></td>
+    <td>
+        <p>{{title}}</p>
+        <label for="name">Custom Name</label>
+        <input type="text" id="name" name="name[{{id}}]" placeholder="Custom Name" value="{{id}}">
+    </td>
+
+    <td>
+        <select id="quality" name="quality[{{id}}]">
+            {{select}}
+        </select>
+        <input type="hidden" name="data[{{id}}]" value='{{data}}' />
+    </td>
+</tr>

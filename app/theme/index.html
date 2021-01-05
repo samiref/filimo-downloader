@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <h3>{{page_title}}</h3>
+    <h4>User: {{user}} <a href="/logout"  onclick="return confirm('Are You Sure?')">Logout</a></h4>
+</div>
+    <div class="container">
+        {{alert}}
+        <form action="{{action_add_new}}" method="post" enctype="application/x-www-form-urlencoded">
+            <label for="movie_url">Movie Url(Or Id)</label>
+            <input type="text" id="movie_url" name="movie_url" placeholder="https://www.filimo.com/w...">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="container">
+        <h3>Movie Queue <span id="loading"></span> </h3>
+        <p><label><input type="checkbox" id="auto_download" >Auto Download</label></p>
+        <table class="customers">
+            <tr>
+                <th style="width: 50px">Poster</th>
+                <th>Movie</th>
+                <th>Progress</th>
+            </tr>
+            <tbody id="items">
+            {{table_content}}
+            </tbody>
+
+        </table>
+    </div>
+
+<script src="/static/main.js" type="application/javascript"></script>
+<script type="application/javascript">
+    window.myInterval = setInterval(process, 5000);
+</script>
+</body>
+</html>

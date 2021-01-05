@@ -1,0 +1,18 @@
+<div class="container">
+    <form action="{{multi_form_action}}" method="post" enctype="application/x-www-form-urlencoded">
+
+        <table class="customers">
+            <tr>
+                <th style="width: 20px">#</th>
+                <th style="width: 50px">Poster</th>
+                <th>Movie Name</th>
+                <th>Quality</th>
+            </tr>
+            <tbody id="multi_items">
+                {{items}}
+            </tbody>
+
+        </table>
+        <input type="submit" value="Download Selected">
+    </form>
+</div>

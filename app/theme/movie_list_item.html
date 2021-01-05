@@ -1,0 +1,15 @@
+<tr class="m_item">
+    <td><img src="{{poster}}" width="150px" style="margin: 5px;" /></td>
+    <td>
+        <p>{{title}}<p>
+        <p>Quality: {{quality}}<p>
+        <p>Id: {{id}}<p>
+        <p>Name: {{name}}<p>
+        <p>Status: {{status}}<p>
+        <p><a href="/remove/{{id}}" onclick="return confirm('Are You Sure?')">Remove From Queue</a><p>
+        <br>
+    </td>
+    <td><div class="bar {{status}}">
+        <div class="load load{{progress}}" style="width: {{progress}}%">{{progress}}%</div>
+    </div></td>
+</tr>
