@@ -17,12 +17,12 @@ function ProcessDownloadList($add_new = true)
     {
         foreach ($download_queue as $key => $item)
         {
-            if($new_key == false && $item['status'] == 'new')
+            if($new_key === false && $item['status'] == 'new')
                 $new_key = $key;
 
             if($in_process_key == false && $item['status'] == 'download')
             {
-                if($item['progress'] == 100)
+                if($item['progress'] >= 100)
                 {
                     $download_queue[$key]['status'] = "finished";
                     unlink($download_queue[$key]['log_file']);

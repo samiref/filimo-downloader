@@ -54,7 +54,7 @@ Route::post("/show/filimo", function(){
         }
         else
         {
-            if(strpos($_POST['movie_url'], "/m/"))
+            if(strpos($_POST['movie_url'], "/m/") || strpos($_POST['movie_url'], "/cms/") )
             {
                 try
                 {
@@ -316,7 +316,7 @@ Route::post("/login", function (){
         $theme["guid"] = $e->guid;
         $theme["temp_id"] = $e->temp_id;
         $theme["code"] = "OTP code";
-        $theme["disable_username"] = " disabled ";
+        $theme["disable_username"] = " readonly ";
         DB::Append("alerts", getAlert('OTP Login',$e->getMessage(), 'info'));
     }
     catch (Exception $e)

@@ -74,7 +74,7 @@ if(isset($_POST['username']) && isset($_POST['code']))
             $theme["guid"] = $e->guid;
             $theme["temp_id"] = $e->temp_id;
             $theme["code"] = "OTP code";
-            $theme["disable_username"] = " disabled ";
+            $theme["disable_username"] = " readonly ";
             $theme["alert"] = getAlert('OTP Login',$e->getMessage(), 'info');
         }
         catch (Exception $e)

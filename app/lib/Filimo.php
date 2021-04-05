@@ -8,6 +8,9 @@ class Filimo extends VideoDownloader
     private $isLogin = false;
     private $authData;
 
+    private $domain = "filimo.com";
+    private $baseUrl = "https://www.filimo.com";
+
     private static $defaultUser;
 
     public static function getDefault()
@@ -37,7 +40,7 @@ class Filimo extends VideoDownloader
             return true;
         }
 
-        $this->getCurl()->get("https://www.filimo.com/signin");
+        $this->getCurl()->get($this->baseUrl . "/signin");
 
         $location = $this->getCurl()->getResponseHeader("location");
 
@@ -52,7 +55,7 @@ class Filimo extends VideoDownloader
 
     public function logout()
     {
-        $res = $this->getCurl()->get("https://www.filimo.com/authentication/authentication/signout");
+        $res = $this->getCurl()->get($this->baseUrl . "/authentication/authentication/signout");
         if($res->getHttpStatus() == 302)
         {
             $this->isLogin = false;
@@ -66,7 +69,7 @@ class Filimo extends VideoDownloader
         if(empty($this->getUserName()))
             throw new Exception("UserName Is Empty.");
 
-        $this->getCurl()->get("https://www.filimo.com/signin");
+        $this->getCurl()->get($this->baseUrl . "/signin");
 
         $location = $this->getCurl()->getResponseHeader("location");
 
@@ -123,7 +126,7 @@ class Filimo extends VideoDownloader
 
     private function getLoginStep1($guid, $temp_id)
     {
-        $res = $this->getCurl()->post("https://www.filimo.com/api/fa/v1/user/Authenticate/signin_step1",
+        $res = $this->getCurl()->post($this->baseUrl . "/api/fa/v1/user/Authenticate/signin_step1",
             array(
                 "account" => $this->getUserName(),
                 "guid" => $guid,
@@ -172,7 +175,7 @@ class Filimo extends VideoDownloader
          */
     }private function getLoginSendOTP($guid, $temp_id)
     {
-        $res = $this->getCurl()->post("https://www.filimo.com/api/fa/v1/user/Authenticate/signin_step1",
+        $res = $this->getCurl()->post($this->baseUrl . "/api/fa/v1/user/Authenticate/signin_step1",
             array(
                 "account" => $this->getUserName(),
                 "codepass_type" => "otp",
@@ -201,7 +204,7 @@ class Filimo extends VideoDownloader
 
     private function getLoginStep2($guid, $temp_id,$code,$type)
     {
-        $res = $this->getCurl()->post("https://www.filimo.com/api/fa/v1/user/Authenticate/signin_step2",
+        $res = $this->getCurl()->post($this->baseUrl . "/api/fa/v1/user/Authenticate/signin_step2",
             array(
                 "account" => $this->getUserName(),
                 "code" => $code,
@@ -241,7 +244,7 @@ class Filimo extends VideoDownloader
 
     private function getLoginTempId($guid)
     {
-        $res = $this->getCurl()->post("https://www.filimo.com/api/fa/v1/user/Authenticate/auth",
+        $res = $this->getCurl()->post($this->baseUrl . "/api/fa/v1/user/Authenticate/auth",
             array('guid' => $guid),true);
 
         if($res->getHttpStatus() == 200)
@@ -267,8 +270,8 @@ class Filimo extends VideoDownloader
             throw new Exception("Must be Login First.");
 
         $videoId = str_replace("/m/", "/w/" , $videoId);
-        if(strpos($videoId, 'filimo.com') == false)
-            $url = 'https://www.filimo.com/w/' . $videoId;
+        if(strpos($videoId, $this->domain) == false)
+            $url = $this->baseUrl . '/w/' . $videoId;
         else
             $url = $videoId;
 
@@ -346,7 +349,7 @@ class Filimo extends VideoDownloader
         if($res->getHttpStatus() != 200)
             throw new Exception("Error in Open {$movie_url}");
 
-        preg_match_all("#filimo.com/w/([a-zA-Z0-9]+)#", $res->getResponse(), $matches);
+        preg_match_all("#{$this->domain}/w/([a-zA-Z0-9]+)#", $res->getResponse(), $matches);
         return $matches[1];
     }
 }
